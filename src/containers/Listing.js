@@ -9,7 +9,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  deleteBusiness = (business) => dispatch(deleteBusiness(business));
+  return {
+    deleteBusiness: (business) => dispatch(deleteBusiness(business)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Listing);

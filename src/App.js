@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import store from "./redux/store";
 import NavBar from "./containers/NavBar";
-import Router from "../router";
+import Router from "./router";
 
 // import './App.css';
 

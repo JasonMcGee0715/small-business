@@ -9,7 +9,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  addBusiness = (business) => dispatch(addBusiness(business));
+  return {
+    addBusiness: (business) => dispatch(addBusiness(business)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddListing);

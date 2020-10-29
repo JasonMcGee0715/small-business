@@ -1,5 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
+
 // import { checkAuth } from "../checkAuth";
 // import { Link } from "react-router-dom";
 import {
@@ -11,6 +13,7 @@ import {
   TableHead,
   Paper,
 } from "@material-ui/core";
+import { checkAuth } from "../../checkAuth";
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -39,6 +42,13 @@ const Listing = (props) => {
                 <TableCell>{business.description}</TableCell>
                 <TableCell>{business.hours}</TableCell>
                 <TableCell>{business.address}</TableCell>
+                {checkAuth() && (
+                  <TableCell>
+                    <DeleteIcon
+                      onClick={(index) => props.deleteBusiness(idx, index)}
+                    />
+                  </TableCell>
+                )}
               </TableRow>
             ))}
           </TableBody>

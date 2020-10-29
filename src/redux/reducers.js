@@ -22,4 +22,4 @@ const user = (state = null, action) => {
   }
 };
 
-export default combineReducers(businesses, user);
+export default combineReducers({ businesses, user });

@@ -44,8 +44,14 @@ const NavBar = (props) => {
               </li>
             )}
             {checkAuth() ? (
-              <li className="nav-list-item">
-                <Link to="/">Logout</Link>
+              <li
+                className="nav-list-item"
+                onClick={() => {
+                  document.cookie = "loggedIn=";
+                  window.location.replace("/login");
+                }}
+              >
+                <Link to="/login">Logout</Link>
               </li>
             ) : (
               <li className="nav-list-item">

@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Link } from "react-router-dom";
 
 // import { checkAuth } from "../checkAuth";
 // import { Link } from "react-router-dom";
@@ -14,6 +15,7 @@ import {
   Paper,
 } from "@material-ui/core";
 import { checkAuth } from "../../checkAuth";
+import { FormatUnderlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   Container: {
@@ -38,7 +40,13 @@ const Listing = (props) => {
           <TableBody>
             {props.businesses.map((business, idx) => (
               <TableRow key={idx}>
-                <TableCell>{business.name}</TableCell>
+                <TableCell
+                  component={Link}
+                  to={`/details/${business.id}`}
+                  className="listingLink"
+                >
+                  {business.name}
+                </TableCell>
                 <TableCell>{business.description}</TableCell>
                 <TableCell>{business.hours}</TableCell>
                 <TableCell>{business.address}</TableCell>

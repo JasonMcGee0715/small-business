@@ -43,6 +43,10 @@
   width: 50%;
 }
 
+.listingLink {
+  text-decoration-line: underline;
+}
+
 .login-button {
   margin-top: 25px !important;
 }

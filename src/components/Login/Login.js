@@ -27,7 +27,6 @@ const Login = (props) => {
           <TextField
             required
             onChange={handleTextChange}
-            // value={this.state.username}
             name="userName"
             label="Username"
             type="text"
@@ -35,7 +34,6 @@ const Login = (props) => {
           <TextField
             required
             onChange={handleTextChange}
-            // value={this.state.password}
             name="password"
             label="Password"
             type="password"

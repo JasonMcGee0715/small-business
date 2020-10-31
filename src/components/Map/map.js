@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const MapContainer = (props) => {
+  const [selectedBusiness, setSelectedBusiness] = React.useState(null);
   const mapStyles = {
     height: "65vh",
     width: "75%",
@@ -12,25 +13,29 @@ const MapContainer = (props) => {
     lng: props.lng,
   };
 
-  const selectedBusiness = [
-    {
-      name: props.business.name,
-      location: {
-        lat: props.lat,
-        lng: props.lng,
-      },
-    },
-  ];
+  //   const selectedBusiness = [
+  //     {
+  //       name: props.business.name,
+  //       location: {
+  //         lat: props.lat,
+  //         lng: props.lng,
+  //       },
+  //     },
+  //   ];
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k">
-      <GoogleMap mapContainerStyle={mapStyles} zoom={19} center={defaultCenter}>
-        {
-          <Marker
-            key={selectedBusiness.name}
-            position={selectedBusiness.location}
-          />
-        }
+      <GoogleMap mapContainerStyle={mapStyles} zoom={14} center={defaultCenter}>
+        <Marker
+          key={props.business.id}
+          position={{
+            lat: props.lat,
+            lng: props.lng,
+          }}
+          onClick={() => {
+            setSelectedBusiness(selectedBusiness);
+          }}
+        />
       </GoogleMap>
     </LoadScript>
   );

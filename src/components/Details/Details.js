@@ -21,7 +21,7 @@ const Details = ({ businesses, match }) => {
     <Box display="flex" flexDirection="column" className={classes.body}>
       <h3>{business.name}</h3>
       <Typography>{business.address}</Typography>
-      <Typography>{business.hours}</Typography>
+      <Typography>Hours: {business.hours}</Typography>
       <Typography>{business.description}</Typography>
       <br></br>
       <div>

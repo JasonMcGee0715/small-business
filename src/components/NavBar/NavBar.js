@@ -36,7 +36,7 @@ const NavBar = (props) => {
           {/* <Button color="inherit">Login</Button> */}
           <ul className="nav-list">
             <li className="nav-list-item">
-              <Link to="/listing">Listing</Link>
+              <Link to="/">Listing</Link>
             </li>
             {checkAuth() && (
               <li className="nav-list-item">

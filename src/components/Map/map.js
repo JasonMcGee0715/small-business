@@ -24,14 +24,7 @@ const MapContainer = (props) => {
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k">
-      <GoogleMap
-        mapContainerStyle={mapStyles}
-        zoom={13}
-        center={defaultCenter}
-        // onGoogleApiLoaded={({ map, maps }) => this.renderMarkers()}
-        // yesIWantToUseGoogleMapApiInternals
-      >
-        {/* <Marker lat={props.lat} lng={props.lng} /> */}
+      <GoogleMap mapContainerStyle={mapStyles} zoom={19} center={defaultCenter}>
         {
           <Marker
             key={selectedBusiness.name}

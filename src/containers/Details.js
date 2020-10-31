@@ -3,7 +3,7 @@ import Details from "../components/Details";
 
 const mapStateToProps = (state) => {
   return {
-    business: state.business,
+    businesses: state.businesses,
   };
 };
 

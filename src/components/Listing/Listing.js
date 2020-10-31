@@ -15,7 +15,6 @@ import {
   Paper,
 } from "@material-ui/core";
 import { checkAuth } from "../../checkAuth";
-import { FormatUnderlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   Container: {

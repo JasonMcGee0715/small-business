@@ -1,51 +1,37 @@
 import React from "react";
-// import { checkAuth } from "../checkAuth";
-// import { Link } from "react-router-dom";
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Card,
-  CardContent,
-} from "@material-ui/core";
+import MapContainer from "../Map";
+import { Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    paddingTop: 50,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
+  body: {
+    width: "70%",
+    marginLeft: "24%",
+    marginRight: "25%",
+    marginTop: 50,
   },
 }));
 
-const Details = (props) => {
+const Details = ({ businesses, match }) => {
   const classes = useStyles();
+  const id = parseInt(match.params.id);
+  const business = businesses.find((entry) => entry.id === id);
+
   return (
-    <Container className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <Card>
-              <CardContent>
-                <Typography>
-                  sdfsadfajsdfljaslkdfjlajsdflkjaskdjfjasdklfjklasjdflkjasldkjfkljasdlkfjklasdjfljasdfjlkasjdfljasdklfjlaksjdfljasfjsd
-                </Typography>
-              </CardContent>
-            </Card>
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <Typography></Typography>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
+    <Box display="flex" flexDirection="column" className={classes.body}>
+      <h3>{business.name}</h3>
+      <Typography>{business.address}</Typography>
+      <Typography>{business.hours}</Typography>
+      <Typography>{business.description}</Typography>
+      <br></br>
+      <div>
+        <MapContainer
+          lat={business.coordsLat}
+          lng={business.coordsLng}
+          business={business}
+        />
+      </div>
+    </Box>
   );
 };
 

@@ -6,9 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 require("dotenv").config();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />,
+
   document.getElementById("root")
 );
 

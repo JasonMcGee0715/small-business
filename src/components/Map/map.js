@@ -25,9 +25,9 @@ const MapContainer = (props) => {
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k">
-      <GoogleMap mapContainerStyle={mapStyles} zoom={14} center={defaultCenter}>
+      <GoogleMap mapContainerStyle={mapStyles} zoom={15} center={defaultCenter}>
         <Marker
-          key={props.business.id}
+          //   key={props.business.id}
           position={{
             lat: props.lat,
             lng: props.lng,

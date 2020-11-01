@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from "react-router-dom";
@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Listing = (props) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    console.log(props.user);
+  });
+
   return (
     <Container maxWidth="lg" className={classes.Container}>
       <Paper elevation={2}>
@@ -39,12 +44,10 @@ const Listing = (props) => {
           <TableBody>
             {props.businesses.map((business, idx) => (
               <TableRow key={idx}>
-                <TableCell
-                  component={Link}
-                  to={`/details/${business.id}`}
-                  className="listingLink"
-                >
-                  {business.name}
+                <TableCell>
+                  <Link to={`/details/${business.id}`} className="listingLink">
+                    {business["name"]}
+                  </Link>
                 </TableCell>
                 <TableCell>{business.description}</TableCell>
                 <TableCell>{business.hours}</TableCell>
@@ -52,6 +55,7 @@ const Listing = (props) => {
                 {checkAuth() && (
                   <TableCell>
                     <DeleteIcon
+                      color="secondary"
                       onClick={(index) => props.deleteBusiness(idx, index)}
                     />
                   </TableCell>

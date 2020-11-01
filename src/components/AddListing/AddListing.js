@@ -1,91 +1,212 @@
-import React from "react";
-import MapContainer from "../Map";
-import { Typography, Box, Grid, GridItem, Paper } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import Geocode from "react-geocode";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+
+// import MapContainer from "../Map";
+import {
+  Typography,
+  Box,
+  Grid,
+  // GridItem,
+  Paper,
+  Container,
+  TextField,
+  Button,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Clear } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   body: {
-    width: "70%",
-    marginLeft: "24%",
-    marginRight: "25%",
     marginTop: 50,
   },
 }));
 
 const AddListing = (props) => {
   const classes = useStyles();
+
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [hours, setHours] = useState("");
+  const [description, setDescription] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [selectedBusiness, setSelectedBusiness] = React.useState(null);
+  //
+  //
+  //
+  //// Using the length of businesses global state to tally up new id for newAddress.  This is what's being pushed up to global state as a new business.
+  const stateAddressLength = props.businesses.length;
+
+  const newAddress = {
+    id: stateAddressLength + 1,
+    name: name,
+    description: description,
+    address: address,
+    hours: hours,
+    coordsLat: lat,
+    coordsLng: lng,
+  };
+  //
+  //
+  //
+  //// GeoCoding API from Google.  Takes address and returns lat and lng coordinates.
+  Geocode.setApiKey("AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k");
+
+  Geocode.fromAddress(address).then(
+    (response) => {
+      const { lat, lng } = response.results[0].geometry.location;
+      console.log(lat, lng);
+      setLat(lat);
+      setLng(lng);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+  //
+  //
+  //
+  //// Handling for setting state on all keys as well as adding the state to global state.
+  useEffect(() => {
+    console.log(Clear);
+    console.log(props.businesses);
+  });
+
+  const handleTextChange = (evt) => {
+    if (evt.target.name === "name") {
+      setName(evt.target.value);
+    }
+    if (evt.target.name === "address") {
+      setAddress(evt.target.value);
+    }
+    if (evt.target.name === "hours") {
+      setHours(evt.target.value);
+    }
+    if (evt.target.name === "description") {
+      setDescription(evt.target.value);
+    }
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    props.addBusiness(newAddress);
+  };
+  //
+  //
+  ////// Map Styles and Info
+  const mapStyles = {
+    height: "60vh",
+    width: "100%",
+  };
+
+  const defaultCenter = {
+    lat: lat,
+    lng: lng,
+  };
+
   return (
-    <div>
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <Paper>
-            <Box display="flex" flexDirection="column">
-              <h3>Text</h3>
-              <Typography>Text</Typography>
-              <Typography>Text</Typography>
-              <Typography>Text</Typography>
+    <Container mx="auto">
+      <Paper className={classes.body} elevation={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <Box p={4} display="flex" flexDirection="column">
+              <Typography variant="h6" style={{ paddingLeft: 15 }}>
+                Add New Business:
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  required
+                  // id="outlined-full-width"
+                  name="name"
+                  onChange={handleTextChange}
+                  style={{ margin: 6 }}
+                  placeholder="Name"
+                  fullWidth
+                  // variant="outlined"
+                />
+                <TextField
+                  required
+                  // id="outlined-full-width"
+                  // label="Address"
+                  name="address"
+                  onChange={handleTextChange}
+                  style={{ margin: 6 }}
+                  placeholder="Address"
+                  fullWidth
+                  // variant="outlined"
+                />
+                <TextField
+                  required
+                  // id="outlined-full-width"
+                  // label="Hours (Example: 8am-9pm)"
+                  name="hours"
+                  onChange={handleTextChange}
+                  style={{ margin: 6 }}
+                  placeholder="Hours (Example: 8am-9pm)"
+                  fullWidth
+                  // variant="outlined"
+                />
+                <TextField
+                  required
+                  // id="outlined-full-width"
+                  // label="Description"
+                  name="description"
+                  onChange={handleTextChange}
+                  style={{ margin: 6 }}
+                  placeholder="Description"
+                  fullWidth
+                  // variant="outlined"
+                />
+                <Button
+                  type="submit"
+                  // className="login-button"
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    marginTop: 25,
+                    width: "50%",
+                    left: "25%",
+                  }}
+                >
+                  Login
+                </Button>
+              </form>
             </Box>
-          </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              m={4}
+              display="flex"
+              flexDirection="column"
+              border={1}
+              borderColor="grey.500"
+              borderRadius="borderRadius"
+            >
+              <LoadScript googleMapsApiKey="AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k">
+                <GoogleMap
+                  mapContainerStyle={mapStyles}
+                  zoom={15}
+                  center={defaultCenter}
+                >
+                  <Marker
+                    //   key={props.business.id}
+                    position={{
+                      lat: lat,
+                      lng: lng,
+                    }}
+                    onClick={() => {
+                      setSelectedBusiness(selectedBusiness);
+                    }}
+                  />
+                </GoogleMap>
+              </LoadScript>
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Paper></Paper>
-        </Grid>
-      </Grid>
-    </div>
-    // <Box display="flex" flexDirection="column" className={classes.body}>
-    //   <h3>{business.name}</h3>
-    //   <Typography>{business.address}</Typography>
-    //   <Typography>Hours: {business.hours}</Typography>
-    //   <Typography>{business.description}</Typography>
-    //   <br></br>
-    //   <div>
-    //     <MapContainer
-    //       lat={business.coordsLat}
-    //       lng={business.coordsLng}
-    //       business={business}
-    //     />
-    //   </div>
-    // </Box>
+      </Paper>
+    </Container>
   );
 };
 
 export default AddListing;
-
-// import React from "react";
-// import MapContainer from "../Map";
-// import { Typography, Box } from "@material-ui/core";
-// import { makeStyles } from "@material-ui/core/styles";
-
-// const useStyles = makeStyles((theme) => ({
-//   body: {
-//     width: "70%",
-//     marginLeft: "24%",
-//     marginRight: "25%",
-//     marginTop: 50,
-//   },
-// }));
-
-// const Details = ({ businesses, match }) => {
-//   const classes = useStyles();
-//   const id = parseInt(match.params.id);
-//   const business = businesses.find((entry) => entry.id === id);
-
-//   return (
-//     <Box display="flex" flexDirection="column" className={classes.body}>
-//       <h3>{business.name}</h3>
-//       <Typography>{business.address}</Typography>
-//       <Typography>Hours: {business.hours}</Typography>
-//       <Typography>{business.description}</Typography>
-//       <br></br>
-//       <div>
-//         <MapContainer
-//           lat={business.coordsLat}
-//           lng={business.coordsLng}
-//           business={business}
-//         />
-//       </div>
-//     </Box>
-//   );
-// };
-
-// export default Details;

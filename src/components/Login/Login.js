@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Container } from "@material-ui/core";
 
 const Login = (props) => {
   const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
 
   const handleTextChange = (evt) => {
     if (evt.target.name === "userName") {
       setUserName(evt.target.value);
     } else {
-      setPassword(evt.target.value);
+      // setPassword(evt.target.value);
     }
   };
 
@@ -19,6 +19,11 @@ const Login = (props) => {
     props.userLogin(userName);
     window.location.replace("/");
   };
+
+  useEffect(() => {
+    console.log(userName);
+    console.log(props.user);
+  });
 
   return (
     <div className="App">

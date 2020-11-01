@@ -1,13 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  // IconButton,
-  Typography,
-  // Button,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Fade, Typography, Paper } from "@material-ui/core";
 import { checkAuth } from "../../checkAuth";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,10 +16,19 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 25,
     padding: 5,
   },
+  fadeIn: {
+    padding: 6,
+    paddingLeft: "5%",
+  },
 }));
 
 const NavBar = (props) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    console.log(props.user);
+  });
+
   return (
     <React.Fragment>
       <AppBar position="relative" className={classes.appBar}>
@@ -61,6 +64,11 @@ const NavBar = (props) => {
           </ul>
         </Toolbar>
       </AppBar>
+      <Fade in={checkAuth()} className={classes.fadeIn}>
+        <Paper elevation={5}>
+          <Typography>Welcome: {props.user}</Typography>
+        </Paper>
+      </Fade>
     </React.Fragment>
   );
 };

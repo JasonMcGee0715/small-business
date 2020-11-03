@@ -22,7 +22,7 @@ const MapContainer = (props) => {
   //       },
   //     },
   //   ];
-
+  console.log(process.env.REACT_APP_KEY);
   return (
     <LoadScript googleMapsApiKey="AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k">
       <GoogleMap mapContainerStyle={mapStyles} zoom={15} center={defaultCenter}>

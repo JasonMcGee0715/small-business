@@ -22,6 +22,7 @@ const Login = (props) => {
 
   useEffect(() => {
     console.log(userName);
+    props.userLogin(userName);
     console.log(props.user);
   });
 
@@ -34,6 +35,7 @@ const Login = (props) => {
             onChange={handleTextChange}
             name="userName"
             label="Username"
+            // placeholder="Username"
             type="text"
           />
           <TextField
@@ -41,6 +43,7 @@ const Login = (props) => {
             onChange={handleTextChange}
             name="password"
             label="Password"
+            // placeholder="Password"
             type="password"
           />
           <Button

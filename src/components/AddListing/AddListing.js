@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Geocode from "react-geocode";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
@@ -51,7 +51,8 @@ const AddListing = (props) => {
   //
   //
   //// GeoCoding API from Google.  Takes address and returns lat and lng coordinates.
-  Geocode.setApiKey("AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k");
+  Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
+  console.log(process.env.REACT_APP_GEOCODE_API_KEY);
 
   Geocode.fromAddress(address).then(
     (response) => {
@@ -101,9 +102,18 @@ const AddListing = (props) => {
   };
 
   const defaultCenter = {
-    lat: lat,
-    lng: lng,
+    lat: Number(lat),
+    lng: Number(lng),
   };
+
+  //
+  //
+  //
+  //// These are used to clear input fields.  Variable are assigned in the textfields.
+  let textInput1 = useRef(null);
+  let textInput2 = useRef(null);
+  let textInput3 = useRef(null);
+  let textInput4 = useRef(null);
 
   return (
     <Container mx="auto">
@@ -123,6 +133,7 @@ const AddListing = (props) => {
                   style={{ margin: 6 }}
                   placeholder="Name"
                   fullWidth
+                  inputRef={textInput1}
                   // variant="outlined"
                 />
                 <TextField
@@ -134,6 +145,7 @@ const AddListing = (props) => {
                   style={{ margin: 6 }}
                   placeholder="Address"
                   fullWidth
+                  inputRef={textInput2}
                   // variant="outlined"
                 />
                 <TextField
@@ -145,6 +157,7 @@ const AddListing = (props) => {
                   style={{ margin: 6 }}
                   placeholder="Hours (Example: 8am-9pm)"
                   fullWidth
+                  inputRef={textInput3}
                   // variant="outlined"
                 />
                 <TextField
@@ -156,6 +169,7 @@ const AddListing = (props) => {
                   style={{ margin: 6 }}
                   placeholder="Description"
                   fullWidth
+                  inputRef={textInput4}
                   // variant="outlined"
                 />
                 <Button
@@ -168,8 +182,16 @@ const AddListing = (props) => {
                     width: "50%",
                     left: "25%",
                   }}
+                  onClick={() => {
+                    setTimeout(() => {
+                      textInput1.current.value = "";
+                      textInput2.current.value = "";
+                      textInput3.current.value = "";
+                      textInput4.current.value = "";
+                    }, 100);
+                  }}
                 >
-                  Login
+                  Add Listing
                 </Button>
               </form>
             </Box>
@@ -192,8 +214,8 @@ const AddListing = (props) => {
                   <Marker
                     //   key={props.business.id}
                     position={{
-                      lat: lat,
-                      lng: lng,
+                      lat: Number(lat),
+                      lng: Number(lng),
                     }}
                     onClick={() => {
                       setSelectedBusiness(selectedBusiness);

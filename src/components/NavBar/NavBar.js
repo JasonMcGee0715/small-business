@@ -26,7 +26,7 @@ const NavBar = (props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(props.user);
+    console.log(typeof props.user);
   });
 
   return (

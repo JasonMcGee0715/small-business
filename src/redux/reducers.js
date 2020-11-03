@@ -16,10 +16,12 @@ const businesses = (state = [], action) => {
 const user = (state = null, action) => {
   switch (action.type) {
     case "USER_LOGIN":
-      return state;
+      return (state = action.value);
     default:
       return state;
   }
 };
+
+// const user = (state = null) => state;
 
 export default combineReducers({ businesses, user });

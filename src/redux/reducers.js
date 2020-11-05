@@ -16,7 +16,7 @@ const businesses = (state = [], action) => {
 const user = (state = null, action) => {
   switch (action.type) {
     case "USER_LOGIN":
-      return (state = action.value);
+      return action.value;
     default:
       return state;
   }

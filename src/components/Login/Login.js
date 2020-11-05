@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField, Button, Container } from "@material-ui/core";
 
 const Login = (props) => {
@@ -17,14 +17,15 @@ const Login = (props) => {
     evt.preventDefault();
     document.cookie = "loggedIn = true; max-age = 60*1000";
     props.userLogin(userName);
-    window.location.replace("/");
+    props.history.push("/");
+    // window.location.replace("/");
   };
 
-  useEffect(() => {
-    console.log(userName);
-    props.userLogin(userName);
-    console.log(props.user);
-  });
+  // useEffect(() => {
+  //   console.log(userName);
+  //   props.userLogin(userName);
+  //   console.log(props.user);
+  // });
 
   return (
     <div className="App">

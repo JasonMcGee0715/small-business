@@ -25,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
 const Listing = (props) => {
   const classes = useStyles();
 
-  useEffect(() => {
-    console.log(props.user);
-  });
+  // useEffect(() => {
+  //   console.log(props.user);
+  // });
 
   return (
     <Container maxWidth="lg" className={classes.Container}>

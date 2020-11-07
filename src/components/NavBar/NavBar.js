@@ -66,7 +66,7 @@ const NavBar = (props) => {
       </AppBar>
       <Fade in={checkAuth()} className={classes.fadeIn}>
         <Paper elevation={5}>
-          <Typography>Welcome: {props.user}!</Typography>
+          <Typography>Good Day, {props.user}</Typography>
         </Paper>
       </Fade>
     </React.Fragment>

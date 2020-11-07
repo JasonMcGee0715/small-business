@@ -13,6 +13,10 @@ const MapContainer = (props) => {
     lng: props.lng,
   };
 
+  // Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
+  // console.log(process.env.REACT_APP_GEOCODE_API_KEY);
+
+  const API_KEY = process.env.REACT_APP_GEOCODE_API_KEY;
   //   const selectedBusiness = [
   //     {
   //       name: props.business.name,
@@ -22,9 +26,8 @@ const MapContainer = (props) => {
   //       },
   //     },
   //   ];
-  console.log(process.env.REACT_APP_KEY);
   return (
-    <LoadScript googleMapsApiKey="AIzaSyC8r2IDLhUdDgjAinNaflgkyQTxZO2Ne - k">
+    <LoadScript googleMapsApiKey={API_KEY}>
       <GoogleMap mapContainerStyle={mapStyles} zoom={15} center={defaultCenter}>
         <Marker
           //   key={props.business.id}
